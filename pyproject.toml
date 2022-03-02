@@ -15,14 +15,13 @@ exclude = '''
 
 [tool.poetry]
 name = "ngi-projector"
-version = "0.0.1"
+version = "0.0.2"
 description = "Project points from one projection to another using pyproj"
 authors = ["Helge Smebye"]
 
 [tool.poetry.dependencies]
 python = "^3.9"
 pyproj = "^3.3.0"
-pytest = "^7.0.1"
 
 [tool.poetry.dev-dependencies]
 black = "*"
