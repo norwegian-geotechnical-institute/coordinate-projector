@@ -1,0 +1,37 @@
+[tool.black]
+line-length = 120
+exclude = '''
+/(
+    \.git
+  | venv
+  | \.venv
+  | env
+  | \.env
+  | _build
+  | build
+  | dist
+)/
+'''
+
+[tool.poetry]
+name = "ngi-projecter"
+version = "0.0.1"
+description = "Project points from one projection to another using pyproj"
+authors = ["Helge Smebye"]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+pyproj = "^3.3.0"
+pytest = "^7.0.1"
+
+[tool.poetry.dev-dependencies]
+black = "*"
+pytest = "*"
+pytest-cov = "*"
+pytest-azurepipelines = "*"
+mypy = "*"
+bandit = "*"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

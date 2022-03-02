@@ -1,20 +1,86 @@
-# Introduction 
-TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
+# NGI Projecter
 
-# Getting Started
-TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
-1.	Installation process
-2.	Software dependencies
-3.	Latest releases
-4.	API references
+[![security: bandit](https://img.shields.io/badge/security-bandit-yellow.svg)](https://github.com/PyCQA/bandit)
+
+This is the NGI Python package for projecting koordinates.
+
+References:
+
+
+
+Latest releases see [CHANGES.md](CHANGES.md)
+
+# Installation (end user) 
+
+```bash
+
+pip install ngi-projecter
+
+```
+
+## Basic usage
+
+### Project a point
+```python
+from ngi_projecter import Projecter
+
+projecter = Projecter()
+#SRIDS 
+fromSrid = "<SRID>"
+toSrid = "<SRID>"
+
+transformer = projecter.get_transformer(f"{fromSrid}-{toSrid}")
+projectedEast, projectedNorth = projecter.transform(transformer,fromEastCoord,fromNorthCoord)
+
+             
+```
+
+# Getting Started developing
+
+1. Software dependencies
+
+   - Python 3.9 or higher
+   - Poetry
+   - black code formatter
+
+2. Clone this repository
+
+3. Install
+
+   `poetry install`
+
+
 
 # Build and Test
-TODO: Describe and show how to build your code and run the tests. 
 
-# Contribute
-TODO: Explain how other users and developers can contribute to make your code better. 
+Run in the project root folder: 
 
-If you want to learn more about creating good readme files then refer the following [guidelines](https://docs.microsoft.com/en-us/azure/devops/repos/git/create-a-readme?view=azure-devops). You can also seek inspiration from the below readme files:
-- [ASP.NET Core](https://github.com/aspnet/Home)
-- [Visual Studio Code](https://github.com/Microsoft/vscode)
-- [Chakra Core](https://github.com/Microsoft/ChakraCore)
+    poetry install pytest 
+
+Build the package wheel: 
+
+    poetry build
+
+
+
+# Publish
+
+To publish the package to NGI's private Azure Artifacts repository set the following configuration: 
+
+    poetry config repositories.ngi https://pkgs.dev.azure.com/ngi001/277b2f77-691a-4d92-bd89-8e7cac121676/_packaging/fieldmanager/pypi/upload
+
+To publish the package to Azure Artifacts, make sure you have set up your NGI credentials.
+
+You need to generate Personal Access Token (PAT). Follow
+[this guide](https://docs.microsoft.com/en-us/azure/devops/organizations/accounts/use-personal-access-tokens-to-authenticate)
+for how to get a PAT via the Azure DevOps GUI. `Packaging (Read, write, & manage)` access is sufficient.
+
+If you want to publish your newly built package you need to set your NGI credentials: 
+
+    poetry config pypi-token.ngi <PAT>
+
+    poetry publish -r ngi
+
+# TODOs
+
+- 
