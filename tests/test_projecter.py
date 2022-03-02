@@ -1,12 +1,12 @@
 import pytest
 
-from ngi_projecter import Projecter
+from ngi_projector import Projector
 from data.coords import Coords
 from data.coords import ProjSets
 
 
 class TestParse:
-    projecter = Projecter()
+    projector = Projector()
 
     @pytest.mark.parametrize(
         "transfDef",
@@ -74,8 +74,8 @@ class TestParse:
         toEast = Coords[id][tc][0]
         toNorth = Coords[id][tc][1]
 
-        transformer = self.projecter.get_transformer(transfDef)
-        pEast, pNorth = self.projecter.transform(transformer, fromEast, fromNorth)
+        transformer = self.projector.get_transformer(transfDef)
+        pEast, pNorth = self.projector.transform(transformer, fromEast, fromNorth)
 
         assert pEast == pytest.approx(toEast, expectedAccuracy)
         assert pNorth == pytest.approx(toNorth, expectedAccuracy)
@@ -83,11 +83,11 @@ class TestParse:
         # Reverse the projection - use swapped coords
         p1, p2 = transfDef.split("-")
         reverseTransDef = f"{p2}-{p1}"
-        transformer = self.projecter.get_transformer(reverseTransDef)
-        pEast, pNorth = self.projecter.transform(transformer, toEast, toNorth)
+        transformer = self.projector.get_transformer(reverseTransDef)
+        pEast, pNorth = self.projector.transform(transformer, toEast, toNorth)
         assert pEast == pytest.approx(fromEast, expectedAccuracy)
         assert pNorth == pytest.approx(fromNorth, expectedAccuracy)
 
     def test_get_supported_projections(self):
-        supportedProjections = self.projecter.get_supported_projections()
+        supportedProjections = self.projector.get_supported_projections()
         print(f"Supported projections: {supportedProjections}")

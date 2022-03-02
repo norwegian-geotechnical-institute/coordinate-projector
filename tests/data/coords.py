@@ -1,7 +1,6 @@
 def getNTM(ntmZone: int):
     for objs in Coords:
         coordSet = Coords[objs]
-        print(f"coordSet {coordSet}")
         if coordSet["NTMZONE"] == ntmZone:
             return coordSet
 

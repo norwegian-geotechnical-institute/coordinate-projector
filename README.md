@@ -1,4 +1,4 @@
-# NGI Projecter
+# NGI Projector
 
 [![security: bandit](https://img.shields.io/badge/security-bandit-yellow.svg)](https://github.com/PyCQA/bandit)
 
@@ -14,25 +14,34 @@ Latest releases see [CHANGES.md](CHANGES.md)
 
 ```bash
 
-pip install ngi-projecter
+pip install ngi-projector
 
 ```
 
 ## Basic usage
 
 ### Project a point
+
 ```python
-from ngi_projecter import Projecter
+from ngi_projector import Projector
 
-projecter = Projecter()
-#SRIDS 
-fromSrid = "<SRID>"
-toSrid = "<SRID>"
+projector = Projector()
+ 
+from_srid = "4326"
+to_srid = "3857"
 
-transformer = projecter.get_transformer(f"{fromSrid}-{toSrid}")
-projectedEast, projectedNorth = projecter.transform(transformer,fromEastCoord,fromNorthCoord)
+# Paris Lat(48.8589506) Lon(2.2768485) EPSG:4326
+from_east, from_north = 2.2768485, 48.8589506 
 
-             
+transformer = projector.get_transformer(f"{from_srid}-{to_srid}")
+projected_east, projected_north = projector.transform(transformer, from_east, from_north)
+
+# Paris Lat(6250962.06) Lon(253457.62) EPSG:3857 is in metres - 2D projection
+assert abs(projected_east - 253457.62) <= 0.01
+assert abs(projected_north - 6250962.06) <= 0.01 
+
+print(f"{projected_east=}, {projected_north=}")
+# projected_east=253457.6156334287, projected_north=6250962.062720417
 ```
 
 # Getting Started developing
@@ -83,4 +92,5 @@ If you want to publish your newly built package you need to set your NGI credent
 
 # TODOs
 
-- 
+- Handle lines
+- Handle polygons
