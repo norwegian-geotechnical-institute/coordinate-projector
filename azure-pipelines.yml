@@ -28,7 +28,7 @@ steps:
     displayName: "bandit"
 
   - script: |
-      poetry run mypy src
+      poetry run mypy src tests
     displayName: "mypy"
 
   - script: |

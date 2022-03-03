@@ -1,3 +1,6 @@
+from typing import Dict
+
+
 def getNTM(ntmZone: int):
     for objs in Coords:
         coordSet = Coords[objs]
@@ -63,7 +66,7 @@ ProjSets = {
 }
 
 
-Coords = {
+Coords: Dict[str, Dict] = {
     "5": {
         "NTMZONE": 5,
         "UTM": 32,
