@@ -16,12 +16,12 @@ class Projector:
             return transformer
 
         from_def_str, to_def_str = transformDef.split("-")
-        fromDefDesc: Optional[Dict] = projections.get(int(from_def_str))
+        fromDefDesc: Optional[Dict] = projections.get(from_def_str)
         if not fromDefDesc:
             raise Exception(f"SRID: {from_def_str} is not supported")
         fromDef = fromDefDesc["definition"]["data"]
 
-        toDefDesc: Optional[Dict] = projections.get(int(to_def_str))
+        toDefDesc: Optional[Dict] = projections.get(to_def_str)
         if not toDefDesc:
             raise Exception(f"SRID: {to_def_str} is not supported")
         toDef = toDefDesc["definition"]["data"]
