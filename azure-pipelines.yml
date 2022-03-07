@@ -7,10 +7,27 @@ trigger:
   - develop
   - main
 
+resources:
+  repositories:
+    - repository: ngi-shared-artifacts
+      type: git
+      name: ngi-shared-artifacts
+
 pool:
   vmImage: ubuntu-latest
 
 steps:
+  - checkout: self
+  - checkout: ngi-shared-artifacts
+
+  - task: CopyFiles@2
+    displayName: copy projections.json from ngi-shared-artifacts
+    inputs:
+      Contents: "$(Build.SourcesDirectory)/ngi-shared-artifacts/gis/projections.json"
+      TargetFolder: "$(Build.SourcesDirectory)/ngi-projector/src/ngi_projector/"
+      OverWrite: true
+      flattenFolders: true
+
   - task: UsePythonVersion@0
     inputs:
       versionSpec: "3.9"
@@ -22,26 +39,32 @@ steps:
       pip install twine
       poetry install
     displayName: "Install dependencies"
+    workingDirectory: "$(Build.SourcesDirectory)/ngi-projector"
 
   - script: |
       poetry run bandit -r src
     displayName: "bandit"
+    workingDirectory: "$(Build.SourcesDirectory)/ngi-projector"
 
   - script: |
       poetry run mypy src tests
     displayName: "mypy"
+    workingDirectory: "$(Build.SourcesDirectory)/ngi-projector"
 
   - script: |
       poetry run pytest . --cov tests --cov src --cov-report html
     displayName: "pytest"
+    workingDirectory: "$(Build.SourcesDirectory)/ngi-projector"
 
   - script: poetry version $(poetry version -s)-dev.$(Build.BuildId)
     displayName: "Add pre-release version"
     condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/develop'))
+    workingDirectory: "$(Build.SourcesDirectory)/ngi-projector"
 
   - script: |
       poetry build
     displayName: "Build package"
+    workingDirectory: "$(Build.SourcesDirectory)/ngi-projector"
 
   - task: TwineAuthenticate@1
     inputs:
@@ -50,3 +73,4 @@ steps:
   - script: |
       twine upload -r fieldmanager --config-file $(PYPIRC_PATH) dist/*.whl
     displayName: Upload package to Azure Artifact
+    workingDirectory: "$(Build.SourcesDirectory)/ngi-projector"
