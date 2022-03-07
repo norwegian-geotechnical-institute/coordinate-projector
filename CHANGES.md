@@ -1,6 +1,6 @@
 # NGI Python Projector Package
 
-__2022-03-07_
+_2022-03-07_
 
 Version 0.0.2
 
