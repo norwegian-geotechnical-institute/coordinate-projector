@@ -17,11 +17,13 @@ exclude = '''
 name = "ngi-projector"
 version = "0.0.2"
 description = "Project points from one projection to another using pyproj"
-authors = ["Helge Smebye"]
+authors = ["Helge Smebye", "Jostein Leira"]
 
 [tool.poetry.dependencies]
 python = "^3.9"
 pyproj = "^3.3.0"
+timezonefinder = "^5.2.0"
+python-dateutil = "^2.8.2"
 
 [tool.poetry.dev-dependencies]
 black = "*"
