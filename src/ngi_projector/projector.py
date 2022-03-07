@@ -10,7 +10,6 @@ class Projector:
         return projections
 
     def get_transformer(self, transformDef: str) -> Transformer:
-        print(f"transformDef: {transformDef}")
 
         if transformer := self.transformers.get(transformDef):
             return transformer
