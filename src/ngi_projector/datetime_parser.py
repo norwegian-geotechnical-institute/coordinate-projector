@@ -72,8 +72,11 @@ def datetime_to_json(
     If no location or timezone is provided, then assume the passed datetime is recorded in the norwegian timezone.
     """
     if not dt:
-        return dt
+        return None
 
     dt = ensure_tz(dt, longitude, latitude, srid=srid)
+
+    if not dt:
+        return None
 
     return dt.replace(microsecond=0).astimezone(tz.UTC).isoformat()
