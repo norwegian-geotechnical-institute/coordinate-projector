@@ -1,11 +1,4 @@
-def getNTM(ntmZone: int):
-    for objs in Coords:
-        coordSet = Coords[objs]
-        if coordSet["NTMZONE"] == ntmZone:
-            return coordSet
-
-
-# def getToNTMCoords(transfID,str):
+from typing import Dict, List, Union
 
 
 ProjSets = {
@@ -63,7 +56,7 @@ ProjSets = {
 }
 
 
-Coords = {
+Coords: Dict[str, Dict[str, Union[int, List]]] = {
     "5": {
         "NTMZONE": 5,
         "UTM": 32,

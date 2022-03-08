@@ -33,8 +33,7 @@ to_srid = "3857"
 # Paris Lat(48.8589506) Lon(2.2768485) EPSG:4326
 from_east, from_north = 2.2768485, 48.8589506 
 
-transformer = projector.get_transformer(f"{from_srid}-{to_srid}")
-projected_east, projected_north = projector.transform(transformer, from_east, from_north)
+projected_east, projected_north = projector.transform(from_srid, to_srid, from_east, from_north)
 
 # Paris Lat(6250962.06) Lon(253457.62) EPSG:3857 is in metres - 2D projection
 assert abs(projected_east - 253457.62) <= 0.01
