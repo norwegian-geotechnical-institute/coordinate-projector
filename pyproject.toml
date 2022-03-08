@@ -22,8 +22,10 @@ authors = ["Helge Smebye", "Jostein Leira"]
 [tool.poetry.dependencies]
 python = "^3.9"
 pyproj = "^3.3.0"
-timezonefinder = "^5.2.0"
 python-dateutil = "^2.8.2"
+types-python-dateutil = "^2.8.9"
+timezonefinder = "^5.2.0"
+
 
 [tool.poetry.dev-dependencies]
 black = "*"

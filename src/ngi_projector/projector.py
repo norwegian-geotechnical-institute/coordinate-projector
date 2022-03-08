@@ -4,14 +4,14 @@ from .projections import projections
 
 
 class Projector:
-    transformers: Dict[str, Transformer] = {}
+    _transformers: Dict[str, Transformer] = {}
 
     def get_supported_projections(self) -> Dict:
         return projections
 
     def get_transformer(self, transformDef: str) -> Transformer:
 
-        if transformer := self.transformers.get(transformDef):
+        if transformer := self._transformers.get(transformDef):
             return transformer
 
         from_def_str, to_def_str = transformDef.split("-")
@@ -25,7 +25,7 @@ class Projector:
             raise Exception(f"SRID: {to_def_str} is not supported")
         toDef = toDefDesc["definition"]["data"]
         transformer = Transformer.from_crs(fromDef, toDef)
-        self.transformers[transformDef] = transformer
+        self._transformers[transformDef] = transformer
         return transformer
 
     def transform(self, transformer: Transformer, east: float, north: float) -> tuple[float, float]:
