@@ -1,11 +1,4 @@
-from typing import Dict
-
-
-def getNTM(ntm_zone: int) -> int:
-    for objs in Coords:
-        coord_set = Coords[objs]
-        if coord_set["NTMZONE"] == ntm_zone:
-            return coord_set
+from typing import Dict, List, Union
 
 
 ProjSets = {
@@ -63,7 +56,7 @@ ProjSets = {
 }
 
 
-Coords: Dict[str, Dict] = {
+Coords: Dict[str, Dict[str, Union[int, List]]] = {
     "5": {
         "NTMZONE": 5,
         "UTM": 32,
