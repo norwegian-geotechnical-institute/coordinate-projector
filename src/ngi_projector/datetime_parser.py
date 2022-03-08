@@ -15,10 +15,10 @@ _time_zone_finder = TimezoneFinder()
 
 
 def ensure_tz(
-        dt: Optional[datetime],
-        longitude: Optional[float] = None,
-        latitude: Optional[float] = None,
-        srid: int = 4326,
+    dt: Optional[datetime],
+    longitude: Optional[float] = None,
+    latitude: Optional[float] = None,
+    srid: int = 4326,
 ) -> Optional[datetime]:
     """
     Return passed datetime dt enriched with timezone.
@@ -42,8 +42,8 @@ def ensure_tz(
         if longitude is not None and latitude is not None:
             if srid and srid != 4326:
                 # TODO: Use a single common transformer for the whole library
-                transformer = projector.get_transformer(f"{srid}-4326")
-                longitude, latitude = projector.transform(transformer, longitude, latitude)
+
+                longitude, latitude = projector.transform(from_srid=srid, to_srid=4326, east=longitude, north=latitude)
 
             # find timezone from position
             input_timezone = tz.gettz(_time_zone_finder.timezone_at(lng=longitude, lat=latitude))
@@ -57,10 +57,10 @@ def ensure_tz(
 
 
 def datetime_to_json(
-        dt: Optional[datetime],
-        longitude: Optional[float] = None,
-        latitude: Optional[float] = None,
-        srid: int = 4326,
+    dt: Optional[datetime],
+    longitude: Optional[float] = None,
+    latitude: Optional[float] = None,
+    srid: int = 4326,
 ) -> Optional[str]:
     """
     Return passed datetime.datetime as json-formatted (iso-8601) string with UTC timezone. Sub-second time information

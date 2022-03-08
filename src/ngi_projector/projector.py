@@ -2,32 +2,39 @@ from pyproj import Transformer
 from typing import Dict, Optional
 from .projections import projections
 
+_transformers: Dict[str, Transformer] = {}
+
 
 class Projector:
-    _transformers: Dict[str, Transformer] = {}
-
-    def get_supported_projections(self) -> Dict:
+    @staticmethod
+    def get_supported_projections() -> Dict:
         return projections
 
-    def get_transformer(self, transformDef: str) -> Transformer:
+    @staticmethod
+    def _get_transformer(from_srid: int, to_srid: int) -> Transformer:
 
-        if transformer := self._transformers.get(transformDef):
+        global _transformers
+
+        if transformer := _transformers.get(f"{from_srid}-{to_srid}"):
             return transformer
 
-        from_def_str, to_def_str = transformDef.split("-")
-        fromDefDesc: Optional[Dict] = projections.get(from_def_str)
-        if not fromDefDesc:
-            raise Exception(f"SRID: {from_def_str} is not supported")
-        fromDef = fromDefDesc["definition"]["data"]
+        from_def_desc: Optional[Dict] = projections.get(str(from_srid))
+        if not from_def_desc:
+            raise Exception(f"SRID: {from_srid} is not supported")
+        from_definition = from_def_desc["definition"]["data"]
 
-        toDefDesc: Optional[Dict] = projections.get(to_def_str)
-        if not toDefDesc:
-            raise Exception(f"SRID: {to_def_str} is not supported")
-        toDef = toDefDesc["definition"]["data"]
-        transformer = Transformer.from_crs(fromDef, toDef)
-        self._transformers[transformDef] = transformer
+        to_def_desc: Optional[Dict] = projections.get(str(to_srid))
+        if not to_def_desc:
+            raise Exception(f"SRID: {to_srid} is not supported")
+        to_definition = to_def_desc["definition"]["data"]
+
+        transformer = Transformer.from_crs(from_definition, to_definition)
+
+        _transformers[f"{from_srid}-{to_srid}"] = transformer
+
         return transformer
 
-    def transform(self, transformer: Transformer, east: float, north: float) -> tuple[float, float]:
-        eastPyProj, northPyProj = transformer.transform(east, north)
-        return eastPyProj, northPyProj
+    def transform(self, from_srid: int, to_srid: int, east: float, north: float) -> tuple[float, float]:
+        transformer: Transformer = self._get_transformer(from_srid, to_srid)
+        projected_east, projected_north = transformer.transform(east, north)
+        return projected_east, projected_north

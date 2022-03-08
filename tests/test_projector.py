@@ -9,85 +9,84 @@ class TestParse:
     projector = Projector()
 
     @pytest.mark.parametrize(
-        "transfDef",
+        "from_srid,to_srid",
         [
-            ("25832-5105"),
-            ("25832-5105"),
-            ("25832-5106"),
-            ("25832-5107"),
-            ("25832-5108"),
-            ("25832-5109"),
-            ("25832-5110"),
-            ("25832-5111"),
-            ("25833-5112"),
-            ("25833-5113"),
-            ("25833-5114"),
-            ("25833-5115"),
-            ("25833-5116"),
-            ("25833-5117"),
-            ("25834-5118"),
-            ("25834-5119"),
-            ("25834-5120"),
-            ("25834-5121"),
-            ("25834-5122"),
-            ("25834-5123"),
-            ("25835-5124"),
-            ("25835-5125"),
-            ("25835-5126"),
-            ("25835-5127"),
-            ("25835-5128"),
-            ("25835-5129"),
-            ("25836-5130"),
-            ("25831-23031"),
-            ("25832-23032"),
-            ("25833-23033"),
-            ("25834-23034"),
-            ("25835-23035"),
-            ("25836-23036"),
-            ("25830-3857"),
-            ("25831-3857"),
-            ("25832-3857"),
-            ("25833-3857"),
-            ("25834-3857"),
-            ("25835-3857"),
-            ("25836-3857"),
-            ("25830-4326"),
-            ("25831-4326"),
-            ("25832-4326"),
-            ("25833-4326"),
-            ("25834-4326"),
-            ("25835-4326"),
-            ("25836-4326"),
+            (25832, 5105),
+            (25832, 5105),
+            (25832, 5106),
+            (25832, 5107),
+            (25832, 5108),
+            (25832, 5109),
+            (25832, 5110),
+            (25832, 5111),
+            (25833, 5112),
+            (25833, 5113),
+            (25833, 5114),
+            (25833, 5115),
+            (25833, 5116),
+            (25833, 5117),
+            (25834, 5118),
+            (25834, 5119),
+            (25834, 5120),
+            (25834, 5121),
+            (25834, 5122),
+            (25834, 5123),
+            (25835, 5124),
+            (25835, 5125),
+            (25835, 5126),
+            (25835, 5127),
+            (25835, 5128),
+            (25835, 5129),
+            (25836, 5130),
+            (25831, 23031),
+            (25832, 23032),
+            (25833, 23033),
+            (25834, 23034),
+            (25835, 23035),
+            (25836, 23036),
+            (25830, 3857),
+            (25831, 3857),
+            (25832, 3857),
+            (25833, 3857),
+            (25834, 3857),
+            (25835, 3857),
+            (25836, 3857),
+            (25830, 4326),
+            (25831, 4326),
+            (25832, 4326),
+            (25833, 4326),
+            (25834, 4326),
+            (25835, 4326),
+            (25836, 4326),
         ],
     )
-    def test_project(self, transfDef):
+    def test_project(self, from_srid, to_srid):
+        trans_def = f"{from_srid}-{to_srid}"
+        proj_set = ProjSets[trans_def]
+        id = proj_set["ID"]
+        fc = proj_set["fromCoord"]
+        tc = proj_set["toCoord"]
+        expected_accuracy = proj_set["expectedAccuracy"]
 
-        projSet = ProjSets[transfDef]
-        id = projSet["ID"]
-        fc = projSet["fromCoord"]
-        tc = projSet["toCoord"]
-        expectedAccuracy = projSet["expectedAccuracy"]
+        from_east = Coords[id][fc][0]
+        from_north = Coords[id][fc][1]
 
-        fromEast = Coords[id][fc][0]
-        fromNorth = Coords[id][fc][1]
+        to_east = Coords[id][tc][0]
+        to_north = Coords[id][tc][1]
 
-        toEast = Coords[id][tc][0]
-        toNorth = Coords[id][tc][1]
+        projected_east, projected_north = self.projector.transform(from_srid, to_srid, from_east, from_north)
 
-        transformer = self.projector.get_transformer(transfDef)
-        pEast, pNorth = self.projector.transform(transformer, fromEast, fromNorth)
-
-        assert pEast == pytest.approx(toEast, expectedAccuracy)
-        assert pNorth == pytest.approx(toNorth, expectedAccuracy)
+        assert projected_east == pytest.approx(to_east, expected_accuracy)
+        assert projected_north == pytest.approx(to_north, expected_accuracy)
 
         # Reverse the projection - use swapped coords
-        p1, p2 = transfDef.split("-")
-        reverseTransDef = f"{p2}-{p1}"
-        transformer = self.projector.get_transformer(reverseTransDef)
-        pEast, pNorth = self.projector.transform(transformer, toEast, toNorth)
-        assert pEast == pytest.approx(fromEast, expectedAccuracy)
-        assert pNorth == pytest.approx(fromNorth, expectedAccuracy)
+        projected_east, projected_north = self.projector.transform(to_srid, from_srid, to_east, to_north)
+        assert projected_east == pytest.approx(from_east, expected_accuracy)
+        assert projected_north == pytest.approx(from_north, expected_accuracy)
 
     def test_get_supported_projections(self):
-        supportedProjections = self.projector.get_supported_projections()
-        print(f"Supported projections: {supportedProjections}")
+        supported_projections = self.projector.get_supported_projections()
+        assert "23031" in supported_projections
+        assert "4326" in supported_projections
+        assert "5130" in supported_projections
+        assert "5105" in supported_projections

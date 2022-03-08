@@ -1,14 +1,11 @@
 from typing import Dict
 
 
-def getNTM(ntmZone: int):
+def getNTM(ntm_zone: int) -> int:
     for objs in Coords:
-        coordSet = Coords[objs]
-        if coordSet["NTMZONE"] == ntmZone:
-            return coordSet
-
-
-# def getToNTMCoords(transfID,str):
+        coord_set = Coords[objs]
+        if coord_set["NTMZONE"] == ntm_zone:
+            return coord_set
 
 
 ProjSets = {
