@@ -29,6 +29,10 @@ classifiers = [
     "Programming Language :: Python :: 3",
     "Topic :: Scientific/Engineering :: GIS",
 ]
+packages = [
+    { include = "coordinate_projector" },
+]
+
 
 [tool.poetry.dependencies]
 python = "^3.9"

@@ -1,11 +1,12 @@
-# NGI Projector
+# Coordinate Projector
 
 [![security: bandit](https://img.shields.io/badge/security-bandit-yellow.svg)](https://github.com/PyCQA/bandit)
 
-This is the Norwegian Geotechnical Institute (NGI) Python package for projecting coordinates.
+This is the Norwegian Geotechnical Institute (NGI) Python package for projecting coordinates. 
+It is a small shim on top of the library [pyproj](https://github.com/pyproj4/pyproj) that again is an interface to 
+ [PROJ](https://proj.org/).  
 
 References:
-
 
 Latest releases see [CHANGES.md](CHANGES.md)
 
@@ -74,3 +75,8 @@ Build the package wheel:
 
 - Handle lines
 - Handle polygons
+
+# Contribute
+
+Please start by adding an issue before submitting any pull requests.
+
