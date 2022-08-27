@@ -17,7 +17,18 @@ exclude = '''
 name = "coordinate-projector"
 version = "0.0.4"
 description = "Project points from one projection to another using pyproj"
-authors = ["Helge Smebye", "Jostein Leira"]
+license = "MIT"
+authors = ["Helge Smebye", "Jostein Leira <jostein@leira.net>"]
+maintainers = ["Jostein Leira <jostein@leira.net>"]
+readme = "README.md"
+homepage = "https://ngi.no"
+repository = "https://github.com/norwegian-geotechnical-institute/coordinate-projector"
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Topic :: Scientific/Engineering :: GIS",
+]
 
 [tool.poetry.dependencies]
 python = "^3.9"
