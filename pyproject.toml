@@ -30,7 +30,7 @@ classifiers = [
     "Topic :: Scientific/Engineering :: GIS",
 ]
 packages = [
-    { include = "coordinate_projector" },
+    { include = "coordinate_projector", from="src" },
 ]
 
 
