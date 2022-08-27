@@ -1,9 +1,10 @@
-# NGI Python Projector Package
-_2022-08-04_
+# NGI Python Coordinate Projector Package
+_2022-08-27_
 
 Version 0.0.4
 
-- Remove timezonefinder version requirement
+- Remove timezonefinder version requirement.
+- Add safety package.
 
 _2022-03-08_
 

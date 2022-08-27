@@ -2,10 +2,9 @@
 
 [![security: bandit](https://img.shields.io/badge/security-bandit-yellow.svg)](https://github.com/PyCQA/bandit)
 
-This is the NGI Python package for projecting koordinates.
+This is the Norwegian Geotechnical Institute (NGI) Python package for projecting coordinates.
 
 References:
-
 
 
 Latest releases see [CHANGES.md](CHANGES.md)
@@ -14,7 +13,7 @@ Latest releases see [CHANGES.md](CHANGES.md)
 
 ```bash
 
-pip install ngi-projector
+pip install coordinate-projector
 
 ```
 
@@ -23,7 +22,7 @@ pip install ngi-projector
 ### Project a point
 
 ```python
-from ngi_projector import Projector
+from coordinate_projector import Projector
 
 projector = Projector()
  
@@ -63,7 +62,7 @@ print(f"{projected_east=}, {projected_north=}")
 
 Run in the project root folder: 
 
-    poetry install pytest 
+    poetry shell pytest 
 
 Build the package wheel: 
 
@@ -72,22 +71,6 @@ Build the package wheel:
 
 
 # Publish
-
-To publish the package to NGI's private Azure Artifacts repository set the following configuration: 
-
-    poetry config repositories.ngi https://pkgs.dev.azure.com/ngi001/277b2f77-691a-4d92-bd89-8e7cac121676/_packaging/fieldmanager/pypi/upload
-
-To publish the package to Azure Artifacts, make sure you have set up your NGI credentials.
-
-You need to generate Personal Access Token (PAT). Follow
-[this guide](https://docs.microsoft.com/en-us/azure/devops/organizations/accounts/use-personal-access-tokens-to-authenticate)
-for how to get a PAT via the Azure DevOps GUI. `Packaging (Read, write, & manage)` access is sufficient.
-
-If you want to publish your newly built package you need to set your NGI credentials: 
-
-    poetry config pypi-token.ngi <PAT>
-
-    poetry publish -r ngi
 
 # TODOs
 

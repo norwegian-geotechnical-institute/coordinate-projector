@@ -24,7 +24,7 @@ steps:
     displayName: copy projections.json from ngi-shared-artifacts
     inputs:
       Contents: "$(Build.SourcesDirectory)/ngi-shared-artifacts/gis/projections.json"
-      TargetFolder: "$(Build.SourcesDirectory)/ngi-projector/src/ngi_projector/"
+      TargetFolder: "$(Build.SourcesDirectory)/ngi-projector/src/coordinate_projector/"
       OverWrite: true
       flattenFolders: true
 

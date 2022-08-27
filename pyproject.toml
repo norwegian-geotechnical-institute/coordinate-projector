@@ -14,7 +14,7 @@ exclude = '''
 '''
 
 [tool.poetry]
-name = "ngi-projector"
+name = "coordinate-projector"
 version = "0.0.4"
 description = "Project points from one projection to another using pyproj"
 authors = ["Helge Smebye", "Jostein Leira"]
@@ -31,9 +31,10 @@ timezonefinder = "*"
 black = "*"
 pytest = "*"
 pytest-cov = "*"
-pytest-azurepipelines = "*"
 mypy = "*"
 bandit = "*"
+safety = "*"
+pip-licenses = "^3.5.4"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
