@@ -1,6 +1,6 @@
 import pytest
 
-from ngi_projector import Projector
+from coordinate_projector import Projector
 from data.coords import Coords
 from data.coords import ProjSets
 

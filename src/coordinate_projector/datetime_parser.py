@@ -7,7 +7,7 @@ from typing import Optional
 from dateutil import tz
 from timezonefinder import TimezoneFinder
 
-from ngi_projector import Projector
+from coordinate_projector import Projector
 
 projector = Projector()
 

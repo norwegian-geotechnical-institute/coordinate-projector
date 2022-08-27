@@ -14,26 +14,42 @@ exclude = '''
 '''
 
 [tool.poetry]
-name = "ngi-projector"
-version = "0.0.3"
+name = "coordinate-projector"
+version = "0.0.4"
 description = "Project points from one projection to another using pyproj"
-authors = ["Helge Smebye", "Jostein Leira"]
+license = "MIT"
+authors = ["Helge Smebye", "Jostein Leira <jostein@leira.net>"]
+maintainers = ["Jostein Leira <jostein@leira.net>"]
+readme = "README.md"
+homepage = "https://ngi.no"
+repository = "https://github.com/norwegian-geotechnical-institute/coordinate-projector"
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Topic :: Scientific/Engineering :: GIS",
+]
+packages = [
+    { include = "coordinate_projector", from="src" },
+]
+
 
 [tool.poetry.dependencies]
 python = "^3.9"
 pyproj = "^3.3.0"
 python-dateutil = "^2.8.2"
 types-python-dateutil = "^2.8.9"
-timezonefinder = "^5.2.0"
+timezonefinder = "*"
 
 
 [tool.poetry.dev-dependencies]
 black = "*"
 pytest = "*"
 pytest-cov = "*"
-pytest-azurepipelines = "*"
 mypy = "*"
 bandit = "*"
+safety = "*"
+pip-licenses = "^3.5.4"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
