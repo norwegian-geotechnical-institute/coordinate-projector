@@ -15,13 +15,13 @@ exclude = '''
 
 [tool.poetry]
 name = "coordinate-projector"
-version = "0.0.4"
+version = "0.0.5"
 description = "Project points from one projection to another using pyproj"
 license = "MIT"
 authors = ["Helge Smebye", "Jostein Leira <jostein@leira.net>"]
 maintainers = ["Jostein Leira <jostein@leira.net>"]
 readme = "README.md"
-homepage = "https://ngi.no"
+homepage = "https://github.com/norwegian-geotechnical-institute/coordinate-projector"
 repository = "https://github.com/norwegian-geotechnical-institute/coordinate-projector"
 classifiers = [
     "Development Status :: 5 - Production/Stable",
@@ -35,7 +35,7 @@ packages = [
 
 
 [tool.poetry.dependencies]
-python = "^3.9"
+python = ">=3.9,<3.11"
 pyproj = "^3.3.0"
 python-dateutil = "^2.8.2"
 types-python-dateutil = "^2.8.9"
