@@ -15,7 +15,7 @@ exclude = '''
 
 [tool.poetry]
 name = "coordinate-projector"
-version = "0.0.6"
+version = "0.0.7"
 description = "Project points from one projection to another using pyproj"
 license = "MIT"
 authors = ["Helge Smebye", "Jostein Leira <jostein@leira.net>"]
