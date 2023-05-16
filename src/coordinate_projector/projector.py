@@ -12,7 +12,6 @@ class Projector:
 
     @staticmethod
     def _get_transformer(from_srid: int, to_srid: int) -> Transformer:
-
         global _transformers
 
         if transformer := _transformers.get(f"{from_srid}-{to_srid}"):

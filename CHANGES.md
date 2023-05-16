@@ -2,6 +2,12 @@
 
 _2023-03-03_
 
+Version 0.0.7
+
+- Update packages and support Python version 3.11.
+
+_2023-03-03_
+
 Version 0.0.6
 
 - Add new projection epsg 23030.
