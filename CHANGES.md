@@ -1,6 +1,19 @@
 # NGI Python Coordinate Projector Package
 
-_2023-03-03_
+_2023-08-24_
+
+Version 0.0.9
+
+- Update packages.
+
+_2023-05-16_
+
+Version 0.0.8
+
+- Change valid Python versions to ">=3.9,<4".
+- Update packages.
+
+- _2023-03-03_
 
 Version 0.0.7
 

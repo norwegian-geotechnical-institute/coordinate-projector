@@ -15,7 +15,7 @@ exclude = '''
 
 [tool.poetry]
 name = "coordinate-projector"
-version = "0.0.8"
+version = "0.0.9"
 description = "Project points from one projection to another using pyproj"
 license = "MIT"
 authors = ["Helge Smebye", "Jostein Leira <jostein@leira.net>"]
@@ -34,6 +34,11 @@ packages = [
 ]
 
 
+[tool.ruff]
+line-length = 120
+src = ["src", "tests"]
+
+
 [tool.poetry.dependencies]
 python = ">=3.9,<4"
 pyproj = "^3.5.0"
@@ -42,7 +47,7 @@ types-python-dateutil = "^2.8.19"
 timezonefinder = "*"
 
 
-[tool.poetry.dev-dependencies]
+[tool.poetry.group.dev.dependencies]
 black = "*"
 pytest = "*"
 pytest-cov = "*"
@@ -50,6 +55,7 @@ mypy = "*"
 bandit = "*"
 safety = "*"
 pip-licenses = "*"
+ruff = "*"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

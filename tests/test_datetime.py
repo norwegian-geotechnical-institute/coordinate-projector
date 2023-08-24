@@ -6,7 +6,7 @@ from datetime import datetime
 import pytest
 from dateutil import tz
 
-from coordinate_projector import datetime_to_json
+from coordinate_projector.datetime_parser import datetime_to_json
 
 
 class TestDatetime:
