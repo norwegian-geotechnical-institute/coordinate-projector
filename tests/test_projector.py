@@ -1,6 +1,6 @@
 import pytest
 
-from coordinate_projector import Projector
+from coordinate_projector.projector import Projector
 from data.coords import Coords
 from data.coords import ProjSets
 
@@ -90,3 +90,6 @@ class TestParse:
         assert "4326" in supported_projections
         assert "5130" in supported_projections
         assert "5105" in supported_projections
+        assert "3006" in supported_projections
+        assert "3010" in supported_projections
+        assert "3018" in supported_projections

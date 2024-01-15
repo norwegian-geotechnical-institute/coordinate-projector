@@ -1,5 +1,13 @@
 # NGI Python Coordinate Projector Package
 
+_2024-01-15_
+
+Version 0.0.10
+
+Add
+
+- Swedish projections SWEREF99 with EPSG SRID 3006 to 3018.
+
 _2023-08-24_
 
 Version 0.0.9
