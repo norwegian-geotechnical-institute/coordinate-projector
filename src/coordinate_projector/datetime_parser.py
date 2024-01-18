@@ -7,18 +7,18 @@ from typing import Optional
 from dateutil import tz
 from timezonefinder import TimezoneFinder
 
-from coordinate_projector import Projector
+from coordinate_projector.projector import Projector
 
 projector = Projector()
 
-_time_zone_finder = TimezoneFinder()
+_time_zone_finder: TimezoneFinder | None = None
 
 
 def ensure_tz(
-    dt: Optional[datetime],
-    longitude: Optional[float] = None,
-    latitude: Optional[float] = None,
-    srid: int = 4326,
+        dt: Optional[datetime],
+        longitude: Optional[float] = None,
+        latitude: Optional[float] = None,
+        srid: int = 4326,
 ) -> Optional[datetime]:
     """
     Return passed datetime dt enriched with timezone.
@@ -31,6 +31,8 @@ def ensure_tz(
     If no location or timezone is provided, then assume the passed datetime is
     recorded in the norwegian timezone.
     """
+    global _time_zone_finder
+
     if not dt:
         return dt
 
@@ -46,6 +48,9 @@ def ensure_tz(
                 longitude, latitude = projector.transform(from_srid=srid, to_srid=4326, east=longitude, north=latitude)
 
             # find timezone from position
+            if not _time_zone_finder:
+                _time_zone_finder = TimezoneFinder()
+
             input_timezone = tz.gettz(_time_zone_finder.timezone_at(lng=longitude, lat=latitude))
         else:
             # Assume Norway
@@ -57,10 +62,10 @@ def ensure_tz(
 
 
 def datetime_to_json(
-    dt: Optional[datetime],
-    longitude: Optional[float] = None,
-    latitude: Optional[float] = None,
-    srid: int = 4326,
+        dt: Optional[datetime],
+        longitude: Optional[float] = None,
+        latitude: Optional[float] = None,
+        srid: int = 4326,
 ) -> Optional[str]:
     """
     Return passed datetime.datetime as json-formatted (iso-8601) string with UTC timezone. Sub-second time information
