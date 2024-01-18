@@ -11,14 +11,14 @@ from coordinate_projector.projector import Projector
 
 projector = Projector()
 
-_time_zone_finder: TimezoneFinder | None = None
+_time_zone_finder: Optional[TimezoneFinder] = None
 
 
 def ensure_tz(
-        dt: Optional[datetime],
-        longitude: Optional[float] = None,
-        latitude: Optional[float] = None,
-        srid: int = 4326,
+    dt: Optional[datetime],
+    longitude: Optional[float] = None,
+    latitude: Optional[float] = None,
+    srid: int = 4326,
 ) -> Optional[datetime]:
     """
     Return passed datetime dt enriched with timezone.
@@ -62,10 +62,10 @@ def ensure_tz(
 
 
 def datetime_to_json(
-        dt: Optional[datetime],
-        longitude: Optional[float] = None,
-        latitude: Optional[float] = None,
-        srid: int = 4326,
+    dt: Optional[datetime],
+    longitude: Optional[float] = None,
+    latitude: Optional[float] = None,
+    srid: int = 4326,
 ) -> Optional[str]:
     """
     Return passed datetime.datetime as json-formatted (iso-8601) string with UTC timezone. Sub-second time information
