@@ -1,5 +1,14 @@
 # NGI Python Coordinate Projector Package
 
+
+_2024-08-13_
+
+Version 0.0.11
+
+Add
+
+- Support for all EPSG SRID codes that PYPROJ does.
+
 _2024-01-15_
 
 Version 0.0.10

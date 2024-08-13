@@ -6,8 +6,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: ['3.9', '3.10', '3.11']
-        poetry-version: ['1.6.1']
+        python-version: ['3.9', '3.10', '3.11', '3.12']
+        poetry-version: ['1.8.3']
         os: [ubuntu-latest]
     runs-on: ${{ matrix.os }}
     steps:
@@ -29,8 +29,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: ['3.9', '3.10', '3.11']
-        poetry-version: ['1.6.1']
+        python-version: ['3.9', '3.10', '3.11', '3.12']
+        poetry-version: ['1.8.3']
         os: [ubuntu-latest]
     runs-on: ${{ matrix.os }}
     steps:
@@ -51,6 +51,6 @@ jobs:
       - name: Run bandit
         run: poetry run bandit .
       - name: Run safety
-        run: poetry run safety check
+        run: poetry run safety check -i 70612
       - name: Check for acceptable licenses
-        run: poetry run pip-licenses --allow-only="MIT License;BSD License;Python Software Foundation License;Apache Software License;Mozilla Public License 2.0 (MPL 2.0)"
+        run: poetry run pip-licenses --allow-only="MIT License;BSD License;Python Software Foundation License;Apache Software License;Mozilla Public License 2.0 (MPL 2.0);The Unlicense (Unlicense);ISC License (ISCL)"

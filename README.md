@@ -49,7 +49,7 @@ print(f"{projected_east=}, {projected_north=}")
 
    - Python 3.9 or higher
    - Poetry
-   - black code formatter
+   - Ruff code formatter
 
 2. Clone this repository
 
