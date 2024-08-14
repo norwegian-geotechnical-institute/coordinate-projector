@@ -1,8 +1,9 @@
 """
 Datetime utilities for converting to and from datetime.datetime, json, naive and time zone aware
 """
+
 from datetime import datetime
-from typing import Optional
+
 
 from dateutil import tz
 from timezonefinder import TimezoneFinder
@@ -11,15 +12,15 @@ from coordinate_projector.projector import Projector
 
 projector = Projector()
 
-_time_zone_finder: Optional[TimezoneFinder] = None
+_time_zone_finder: TimezoneFinder | None = None
 
 
 def ensure_tz(
-    dt: Optional[datetime],
-    longitude: Optional[float] = None,
-    latitude: Optional[float] = None,
+    dt: datetime | None,
+    longitude: float | None = None,
+    latitude: float | None = None,
     srid: int = 4326,
-) -> Optional[datetime]:
+) -> datetime | None:
     """
     Return passed datetime dt enriched with timezone.
 
@@ -43,8 +44,6 @@ def ensure_tz(
         # timezone naive (no time zone in dt)
         if longitude is not None and latitude is not None:
             if srid and srid != 4326:
-                # TODO: Use a single common transformer for the whole library
-
                 longitude, latitude = projector.transform(from_srid=srid, to_srid=4326, east=longitude, north=latitude)
 
             # find timezone from position
@@ -62,11 +61,11 @@ def ensure_tz(
 
 
 def datetime_to_json(
-    dt: Optional[datetime],
-    longitude: Optional[float] = None,
-    latitude: Optional[float] = None,
+    dt: datetime | None,
+    longitude: float | None = None,
+    latitude: float | None = None,
     srid: int = 4326,
-) -> Optional[str]:
+) -> str | None:
     """
     Return passed datetime.datetime as json-formatted (iso-8601) string with UTC timezone. Sub-second time information
     is removed.

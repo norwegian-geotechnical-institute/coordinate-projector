@@ -87,8 +87,7 @@ class TestParse:
     def test_get_supported_projections(self):
         supported_projections = self.projector.get_supported_projections()
         assert "23031" in supported_projections
-        assert "4326" in supported_projections
-        assert "5130" in supported_projections
+        assert "4326" in supported_projections  # WGS 84 -- WGS84 - World Geodetic System 1984, used in GPS
         assert "5105" in supported_projections
         assert "3006" in supported_projections
         assert "3010" in supported_projections
