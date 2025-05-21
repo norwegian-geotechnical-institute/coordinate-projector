@@ -1,3 +1,32 @@
+[project]
+name = "coordinate-projector"
+version = "0.0.12"
+description = "Project points from one projection to another using pyproj"
+authors = [
+    { name = "Helge Smebye" },
+    { name = "Jostein Leira", email = "jostein@leira.net" },
+]
+requires-python = ">=3.10,<4"
+readme = "README.md"
+license = "MIT"
+maintainers = [{ name = "Jostein Leira", email = "jostein@leira.net" }]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Topic :: Scientific/Engineering :: GIS",
+]
+dependencies = [
+    "pyproj>=3.6.1,<4",
+    "python-dateutil>=2.8.2,<3",
+    "types-python-dateutil>=2.8.19,<3",
+    "timezonefinder",
+]
+
+[project.urls]
+Homepage = "https://github.com/norwegian-geotechnical-institute/coordinate-projector"
+Repository = "https://github.com/norwegian-geotechnical-institute/coordinate-projector"
+
 [tool.black]
 line-length = 120
 exclude = '''
@@ -13,51 +42,33 @@ exclude = '''
 )/
 '''
 
-[tool.poetry]
-name = "coordinate-projector"
-version = "0.0.11"
-description = "Project points from one projection to another using pyproj"
-license = "MIT"
-authors = ["Helge Smebye", "Jostein Leira <jostein@leira.net>"]
-maintainers = ["Jostein Leira <jostein@leira.net>"]
-readme = "README.md"
-homepage = "https://github.com/norwegian-geotechnical-institute/coordinate-projector"
-repository = "https://github.com/norwegian-geotechnical-institute/coordinate-projector"
-classifiers = [
-    "Development Status :: 5 - Production/Stable",
-    "Operating System :: OS Independent",
-    "Programming Language :: Python :: 3",
-    "Topic :: Scientific/Engineering :: GIS",
+[dependency-groups]
+dev = [
+    "pytest",
+    "pytest-cov",
+    "mypy",
+    "bandit",
+    "safety",
+    "pip-licenses-cli",
+    "ruff",
 ]
-packages = [
-    { include = "coordinate_projector", from="src" },
-]
-
 
 [tool.ruff]
 line-length = 120
 src = ["src", "tests"]
 
-[tool.ruff.lint.per-file-ignores]
-"__init__.py" = ["F401"]
+[tool.hatch.build.targets.sdist]
+include = ["src/coordinate_projector"]
 
-[tool.poetry.dependencies]
-python = ">=3.10,<4"
-pyproj = "^3.6.1"
-python-dateutil = "^2.8.2"
-types-python-dateutil = "^2.8.19"
-timezonefinder = "*"
+[tool.hatch.build.targets.wheel]
+include = ["src/coordinate_projector"]
 
-
-[tool.poetry.group.dev.dependencies]
-pytest = "*"
-pytest-cov = "*"
-mypy = "*"
-bandit = "*"
-safety = "*"
-pip-licenses = "*"
-ruff = "*"
+[tool.hatch.build.targets.wheel.sources]
+"src/coordinate_projector" = "coordinate_projector"
 
 [build-system]
-requires = ["poetry-core>=1.0.0"]
-build-backend = "poetry.core.masonry.api"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["F401"]

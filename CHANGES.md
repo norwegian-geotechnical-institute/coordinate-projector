@@ -1,6 +1,17 @@
 # NGI Python Coordinate Projector Package
 
 
+
+
+## Version 0.0.12
+_2025-05-21_
+
+Internal
+
+- Move from Poetry to uv.
+- Update packages.
+
+
 _2024-08-13_
 
 Version 0.0.11
@@ -30,7 +41,7 @@ Version 0.0.8
 - Change valid Python versions to ">=3.9,<4".
 - Update packages.
 
-- _2023-03-03_
+_2023-03-03_
 
 Version 0.0.7
 
