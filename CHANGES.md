@@ -1,6 +1,12 @@
 # NGI Python Coordinate Projector Package
 
 
+## Version 0.0.13
+_2025-05-21_
+
+Internal
+
+- Refactor release workflow for PyPI publishing.
 
 
 ## Version 0.0.12
