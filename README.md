@@ -47,15 +47,15 @@ print(f"{projected_east=}, {projected_north=}")
 
 1. Software dependencies
 
-   - Python 3.9 or higher
-   - Poetry
+   - Python 3.10 or higher
+   - uv
    - Ruff code formatter
 
 2. Clone this repository
 
 3. Install
 
-   `poetry install`
+   `uv install`
 
 
 
@@ -63,13 +63,17 @@ print(f"{projected_east=}, {projected_north=}")
 
 Run in the project root folder: 
 
-    poetry shell pytest 
+    uv run pytest 
 
 Build the package wheel: 
 
-    poetry build
+    uv build
 
 # Publish
+
+Publish the package to PyPi:
+
+    uv publish --token ${PYPI_TOKEN}
 
 # TODOs
 
