@@ -55,7 +55,7 @@ print(f"{projected_east=}, {projected_north=}")
 
 3. Install
 
-   `uv install`
+   `uv sync --all-extras --dev`
 
 
 
