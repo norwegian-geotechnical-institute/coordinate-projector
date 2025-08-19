@@ -1,12 +1,12 @@
 [project]
 name = "coordinate-projector"
-version = "0.0.13"
+version = "0.0.14"
 description = "Project points from one projection to another using pyproj"
 authors = [
     { name = "Helge Smebye" },
     { name = "Jostein Leira", email = "jostein@leira.net" },
 ]
-requires-python = ">=3.10,<4"
+requires-python = ">=3.11,<4"
 readme = "README.md"
 license = "MIT"
 maintainers = [{ name = "Jostein Leira", email = "jostein@leira.net" }]
@@ -20,7 +20,7 @@ dependencies = [
     "pyproj>=3.6.1,<4",
     "python-dateutil>=2.8.2,<3",
     "types-python-dateutil>=2.8.19,<3",
-    "timezonefinder",
+    "tzfpy[tzdata]>=1.0.0",
 ]
 
 [project.urls]

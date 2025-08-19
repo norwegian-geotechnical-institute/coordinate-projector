@@ -1,6 +1,13 @@
 # NGI Python Coordinate Projector Package
 
 
+## Version 0.0.14
+_2025-08-19_
+
+Internal
+
+- Replace the package `timezonefinder` with `tzfpy` for improved performance.
+
 ## Version 0.0.13
 _2025-05-21_
 

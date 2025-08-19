@@ -3,16 +3,14 @@ Datetime utilities for converting to and from datetime.datetime, json, naive and
 """
 
 from datetime import datetime
-
+from zoneinfo import ZoneInfo
 
 from dateutil import tz
-from timezonefinder import TimezoneFinder
+from tzfpy import get_tz
 
 from coordinate_projector.projector import Projector
 
 projector = Projector()
-
-_time_zone_finder: TimezoneFinder | None = None
 
 
 def ensure_tz(
@@ -32,13 +30,11 @@ def ensure_tz(
     If no location or timezone is provided, then assume the passed datetime is
     recorded in the norwegian timezone.
     """
-    global _time_zone_finder
-
     if not dt:
         return dt
 
     if not isinstance(dt, datetime):
-        raise Exception("Got unexpected type for datetime!")
+        raise TypeError("Got unexpected type for datetime!")
 
     if dt.tzinfo is None or dt.tzinfo.utcoffset(dt) is None:
         # timezone naive (no time zone in dt)
@@ -47,15 +43,12 @@ def ensure_tz(
                 longitude, latitude = projector.transform(from_srid=srid, to_srid=4326, east=longitude, north=latitude)
 
             # find timezone from position
-            if not _time_zone_finder:
-                _time_zone_finder = TimezoneFinder()
-
-            input_timezone = tz.gettz(_time_zone_finder.timezone_at(lng=longitude, lat=latitude))
+            input_timezone = get_tz(lng=longitude, lat=latitude)
         else:
             # Assume Norway
-            input_timezone = tz.gettz("Europe/Oslo")
+            input_timezone = "Europe/Oslo"
 
-        dt = dt.replace(tzinfo=input_timezone)
+        dt = dt.replace(tzinfo=ZoneInfo(input_timezone))
 
     return dt
 
