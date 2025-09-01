@@ -49,6 +49,7 @@ dev = [
     "mypy",
     "bandit",
     "safety",
+    "typer>=0.16,<0.17", # Due to no restriction in the Safety client
     "pip-licenses-cli",
     "ruff",
 ]
