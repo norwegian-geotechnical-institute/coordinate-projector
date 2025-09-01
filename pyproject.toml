@@ -1,6 +1,6 @@
 [project]
 name = "coordinate-projector"
-version = "0.0.14"
+version = "0.0.15"
 description = "Project points from one projection to another using pyproj"
 authors = [
     { name = "Helge Smebye" },
@@ -49,6 +49,7 @@ dev = [
     "mypy",
     "bandit",
     "safety",
+    "typer>=0.16,<0.17", # Due to no restriction in the Safety client
     "pip-licenses-cli",
     "ruff",
 ]

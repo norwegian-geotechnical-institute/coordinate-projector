@@ -29,7 +29,9 @@ class Projector:
 
         return transformer
 
-    def transform(self, from_srid: int | str, to_srid: int | str, east: float, north: float) -> tuple[float, float]:
+    def transform(
+        self, from_srid: int | str, to_srid: int | str, east: float, north: float, error_check=False
+    ) -> tuple[float, float]:
         transformer: Transformer = self._get_transformer(from_srid, to_srid)
-        projected_east, projected_north = transformer.transform(east, north)
+        projected_east, projected_north = transformer.transform(east, north, errcheck=error_check)
         return projected_east, projected_north

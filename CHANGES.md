@@ -1,5 +1,11 @@
 # NGI Python Coordinate Projector Package
 
+## Version 0.0.15
+_2025-09-01_
+
+- Add new parameter `error_check` to the `Projector.transform()` method. 
+  If set to `True` (default is `False`), the method will raise a `ValueError` if the transformation fails instead of 
+  returning Infinity values.
 
 ## Version 0.0.14
 _2025-08-19_
